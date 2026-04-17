@@ -5,7 +5,7 @@ import {
 } from "expo-camera";
 import * as Haptics from "expo-haptics";
 import { addDoc, collection } from "firebase/firestore";
-import React, { useEffect, useRef, useState, forwardRef, memo } from "react";
+import React, { forwardRef, memo, useEffect, useRef, useState } from "react";
 import { Dimensions, Pressable, Text, View } from "react-native";
 import { db } from "../firebase";
 import Fruit from "./Fruit";
@@ -25,7 +25,7 @@ const HiddenCamera = memo(
         />
       </View>
     );
-  })
+  }),
 );
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -270,20 +270,19 @@ export default function GameScreen({
 
   return (
     <View className="flex-1 bg-slate-900 border-8 border-indigo-900/30">
-      
       {/* 1. Fullsize camera running in the background to capture actual photos */}
-        {shouldRenderCamera && (
-          <HiddenCamera ref={cameraRef} mode={captureMode} />
-        )}      {/* 2. Opaque Background Layer OVER the camera to block its shutter flashes */}
-      <View 
-        className="absolute top-0 left-0 w-full h-full bg-slate-900 z-10" 
-        pointerEvents="none" 
+      {shouldRenderCamera && (
+        <HiddenCamera ref={cameraRef} mode={captureMode} />
+      )}{" "}
+      {/* 2. Opaque Background Layer OVER the camera to block its shutter flashes */}
+      <View
+        className="absolute top-0 left-0 w-full h-full bg-slate-900 z-10"
+        pointerEvents="none"
       />
       <View
         className="absolute w-full h-full bg-indigo-500/10 z-10"
         pointerEvents="none"
       />
-
       <View
         className="absolute top-12 w-full flex-row justify-between px-5 z-20"
         pointerEvents="box-none"
@@ -299,7 +298,6 @@ export default function GameScreen({
           </Text>
         </View>
       </View>
-
       <Pressable
         className="flex-1 w-full h-full z-20 pt-24"
         onPress={handleBackgroundTap}
