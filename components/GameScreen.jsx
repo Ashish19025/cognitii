@@ -273,7 +273,7 @@ export default function GameScreen({
       {/* 1. Fullsize camera running in the background to capture actual photos */}
       {shouldRenderCamera && (
         <HiddenCamera ref={cameraRef} mode={captureMode} />
-      )}{" "}
+      )}
       {/* 2. Opaque Background Layer OVER the camera to block its shutter flashes */}
       <View
         className="absolute top-0 left-0 w-full h-full bg-slate-900 z-10"
